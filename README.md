@@ -1,132 +1,79 @@
-0x19. C - Stacks, Queues - LIFO, FIFO
-About: In this project, we created a simple interpreter for Monty ByteCodes. The interpreter reads a bytecode file and executes the bytecode commands.
+# Project 0x19 - C - Stacks, Queues - LIFO, FIFO
 
-The Monty language
-Monty 0.98 is a scripting language that is first compiled into Monty byte codes (Just like Python). It relies on a unique stack, with specific instructions to manipulate it.
+This project was developed by [Elmehdi Bouslam](https://github.com/Mido-Hyuga) and [Amal Hadraoui](https://github.com/amalia8029).
 
-Monty byte code files
-Files containing Monty byte codes usually have the .m extension. Most of the industry uses this standard but it is not required by the specification of the language. There is not more than one instruction per line. There can be any number of spaces before or after the opcode and its argument: examples
+## About
 
-Objectives:
-To know what LIFO and FIFO mean
-To know what a stack is, and when to use it
-To know what a queue is, and when to use it
-To know the common implementations of stacks and queues
-To know the most common use cases of stacks and queues
-To know the proper way to use global variables
-Resource:
-Difference between Stack and Queue Data Structures ||
-General Requirements
-Allowed editors: vi, vim, emacs
-All files is compiled on Ubuntu 20.04 LTS using gcc, using the options -Wall -Werror -Wextra -pedantic -std=gnu89
-All files ends with a new line
-There is README.md file at the root of the alx-low_level_programming
-Maximum of one global variable is allowed
-No more than 5 functions per file
-The C standard library is allowed
-The prototypes of all the functions were included in the header file called monty.h
-All the header files are include guarded
+In this project, we have created a simple interpreter for Monty ByteCodes. The interpreter reads a bytecode file and executes the bytecode commands.
 
-Instruction given:
-To use the following data structures for this project, and to also include them in the header file.
+The Monty Language
+
+Monty 0.98 is a scripting language that is first compiled into Monty byte codes (similar to Python). It relies on a unique stack, with specific instructions to manipulate it.
+
+## Monty Byte Code Files
+
+Files containing Monty byte codes usually have the .m extension. While most of the industry follows this standard, it is not required by the language specification. There should not be more than one instruction per line. There can be any number of spaces before or after the opcode and its argument.
+
+## Objectives
+
+- To understand what LIFO and FIFO mean.
+- To understand what a stack is and when to use it.
+- To understand what a queue is and when to use it.
+- To understand common implementations of stacks and queues.
+- To understand the most common use cases of stacks and queues.
+- To know how to properly use global variables.
+
+## Resources
+
+- [Difference between Stack and Queue Data Structures](https://www.geeksforgeeks.org/difference-between-stack-and-queue-data-structures/)
+
+## General Requirements
+
+- Allowed editors: vi, vim, emacs.
+- All files are compiled on Ubuntu 20.04 LTS using gcc, using the options `-Wall -Werror -Wextra -pedantic -std=gnu89`.
+- All files end with a new line.
+- There is a README.md file at the root of the alx-low_level_programming.
+- A maximum of one global variable is allowed.
+- No more than 5 functions per file.
+- The C standard library is allowed.
+- The prototypes of all the functions are included in the header file called `monty.h`.
+- All header files are include guarded.
+
+## Instructions Given
+
+To use the following data structures for this project, and to also include them in the header file:
+
+``c
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
  * @prev: points to the previous element of the stack (or queue)
  * @next: points to the next element of the stack (or queue)
- *
  * Description: doubly linked list node structure
  * for stack, queues, LIFO, FIFO
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+    int n;
+    struct stack_s *prev;
+    struct stack_s *next;
 } stack_t;
-
 
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
  * @f: function to handle the opcode
- *
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+    char *opcode;
+    void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-Compilation & Output
-These codes were compiled using: gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
-Any output must be printed on stdout
-Any error message must be printed on stderr
+## Compilation & Output
 
+These codes were compiled using:
+ gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
 
-Monty Opcodes
-push
-
-Usage: push <int>
-Pushes an element to the stack.
-The parameter <int> must be an integer.
-pall
-
-Prints all values in the stack/queue, starting from the top.
-pint
-
-Prints the top value of the stack/queue.
-pop
-
-Removes the top element of the stack/queue.
-swap
-
-Swaps the top two elements of the stack/queue.
-nop
-
-Does not do anything.
-add
-
-Adds the top two elements of the stack/queue.
-The result is stored in the second element from the top and the top element is popped.
-sub
-
-Subtracts the top element of the stack/queue from the second element from the top.
-The result is stored in the second element from the top and the top element is removed.
-mul
-
-Multiplies the top two elements of the stack/queue.
-The result is stored in the second element from the top and the top element is removed.
-div
-
-Divides the second element from the top of the stack/queue by the top element.
-The result is stored in the second element from the top and the top element is removed.
-mod
-
-Computes the modulus of the second element from the top of the stack/queue divided by the top element.
-The result is stored in the second element from the top and the top element is removed.
-pchar
-
-Prints the character value of the top element of the stack/queue.
-The integer at the top is treated as an ASCII value.
-pstr
-
-Prints the string contained in the stack/queue.
-Prints characters element by element until the stack/queue is empty, a value is 0, or an error occurs.
-rotl
-
-Rotates the top element of the stack/queue to the bottom.
-rotr
-
-Rotates the bottom element of the stack/queue to the top.
-stack
-
-Switches a queue to stack mode.
-queue
-
-Switches a stack to queue mode.
-▶️ Opcodes preceeded by a # are treated as comments and the corresponding line is ignored.
-
-▶️ Lines can be empty and can contain any number of spaces before or after an opcode and its argument (only the first opcode and/or argument is taken into account).
